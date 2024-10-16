@@ -1,0 +1,19 @@
+punishments:
+  teleport: true
+  effect: true
+  warning: true
+  damage: true
+  sound: true
+  message: true
+
+effects:
+  - 'BLINDNESS|100|0'
+  - 'SLOW|100|0'
+
+damage: 1
+
+sound: 'BLOCK_NOTE_BLOCK_GUITAR|0.5|0'
+
+warnings:
+  max: 10
+  punish-command: 'your punishment command %player%'

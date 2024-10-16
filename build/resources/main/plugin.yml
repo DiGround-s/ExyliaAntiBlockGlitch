@@ -1,0 +1,12 @@
+name: ExyliaAntiBlockGlitch
+version: '1.0.0'
+main: net.diground.exyliaAntiBlockGlitch.ExyliaAntiBlockGlitch
+api-version: '1.16'
+authors: [ DiGround ]
+website: plugins.exylia.net/support
+
+commands:
+  abg:
+    description: Main command
+    aliases: [ abg ]
+    permission: exyliaantiblockglitch.admin

@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'net.diground'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://oss.sonatype.org/content/groups/public/' }
+    maven { url = 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'org.xerial:sqlite-jdbc:3.46.1.2'
+    compileOnly 'com.zaxxer:HikariCP:5.0.1'
+
+    implementation 'net.kyori:adventure-api:4.17.0'
+    implementation 'net.kyori:adventure-platform-bukkit:4.3.4'
+    implementation 'net.kyori:adventure-text-minimessage:4.17.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(16)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    relocate 'net.kyori', 'net.diground.exyliaTicTacToe.shaded.net.kyori'
+    minimize()
+    exclude 'META-INF/MANIFEST.MF', 'classpath.index'
+}
+
+processResources {
+    filteringCharset = 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand version: project.version
+    }
+}

@@ -1,0 +1,14 @@
+prefix: '<gradient:#8a51c4:#aa76de>&lABG&r'
+default: '%prefix% <#a33b53>You can''t do that!'
+with-waring: '%prefix% <#a33b53>You can''t do that! <#ffc58f>You have %warnings% warnings left.'
+help_message: |-
+  <#8a51c4>&lExyliaAntiBlockGlitch&r
+  <#aa76de>- /abg reload &8- <#e7cfff>Reload the plugin.
+
+system:
+  no_permission: '%prefix% <#a33b53>You don''t have permission to use this command.'
+  only_players: '%prefix% <#a33b53>This command can only be used by players.'
+  reloaded: '%prefix% <#8fffc1>Plugin reloaded.'
+
+usage:
+  reload: '%prefix% <#e7cfff>Use: <#aa76de>/abg reload'

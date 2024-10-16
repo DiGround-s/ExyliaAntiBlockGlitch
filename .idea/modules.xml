@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlitch.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlitch.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlitch.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlitch.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.test.iml" />
+    </modules>
+  </component>
+</project>
