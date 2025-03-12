@@ -1,5 +1,5 @@
 name: ExyliaAntiBlockGlitch
-version: '1.0.0'
+version: 1.0.1
 main: net.diground.exyliaAntiBlockGlitch.ExyliaAntiBlockGlitch
 api-version: '1.16'
 authors: [ DiGround ]

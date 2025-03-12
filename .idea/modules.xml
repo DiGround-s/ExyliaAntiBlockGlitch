@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ExyliaAntiBlockGlith.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IdeaProjects.ExyliaAntiBlockGlitch.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IdeaProjects.ExyliaAntiBlockGlitch.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IdeaProjects.ExyliaAntiBlockGlitch.test.iml" filepath="$PROJECT_DIR$/.idea/modules/IdeaProjects.ExyliaAntiBlockGlitch.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.diground.ExyliaAntiBlockGlitch.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.diground.ExyliaAntiBlockGlitch.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.diground.ExyliaAntiBlockGlitch.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.diground.ExyliaAntiBlockGlitch.test.iml" />
     </modules>
   </component>
 </project>

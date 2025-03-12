@@ -5,6 +5,7 @@ import net.diground.exyliaAntiBlockGlitch.listeners.BlockListener;
 import net.diground.exyliaAntiBlockGlitch.managers.ConfigManager;
 import net.diground.exyliaAntiBlockGlitch.managers.WarningManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -27,9 +28,12 @@ public final class ExyliaAntiBlockGlitch extends JavaPlugin {
     public void onEnable() {
         this.adventure = BukkitAudiences.create(this);
         instance = this;
-        loadListeners();
-        loadManagers();
-        loadCommands();
+        Bukkit.getScheduler().runTask(this, () -> {
+            loadListeners();
+            loadManagers();
+            loadCommands();
+            Bukkit.getLogger().info(getDescription().getName() + " v" + getDescription().getVersion() + " enabled!");
+        });
     }
 
     @Override

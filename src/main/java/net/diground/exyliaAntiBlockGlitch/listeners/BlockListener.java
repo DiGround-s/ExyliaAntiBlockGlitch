@@ -17,7 +17,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
@@ -36,7 +39,7 @@ public class BlockListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (event.isCancelled()) {
             Player player = event.getPlayer();
@@ -64,6 +67,37 @@ public class BlockListener implements Listener {
             }
         }
     }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            Player player = event.getPlayer();
+            ItemStack item = event.getItem();
+
+            if (item != null && (item.getType() == Material.WATER_BUCKET || item.getType() == Material.LAVA_BUCKET)) {
+                Location location = player.getLocation();
+                BoundingBox boundingBox = player.getBoundingBox();
+                Block clickedBlock = event.getClickedBlock();
+
+                if (clickedBlock != null) {
+                    Block targetBlock = clickedBlock.getRelative(event.getBlockFace());
+
+                    if (isNearPlayerFeet(targetBlock, location)) {
+                        Set<Block> firstBlocks = getFloorBlocks(location, boundingBox);
+                        Set<Block> secondBlocks = new HashSet<>();
+
+                        if (getLowerBlocks(firstBlocks, secondBlocks)) {
+                            Set<Block> thirdBlocks = new HashSet<>();
+                            if (getLowerBlocks(secondBlocks, thirdBlocks)) {
+                                handlePunishments(player, thirdBlocks);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     private boolean isDoubleSlab(BlockData blockData) {
         return blockData instanceof Slab && ((Slab) blockData).getType().equals(Slab.Type.DOUBLE);
@@ -141,7 +175,7 @@ public class BlockListener implements Listener {
         currentWarnings++;
 
         if (currentWarnings >= maxWarnings) {
-            String consoleCommand = config.getString("warnings.punish-command", "default command").replace("%player%", player.getName());
+            String consoleCommand = Objects.requireNonNull(config.getString("warnings.punish-command", "default command")).replace("%player%", player.getName());
             plugin.getServer().dispatchCommand(Bukkit.getConsoleSender(), consoleCommand);
             warningManager.resetWarnings(playerUUID);
         }
@@ -187,15 +221,23 @@ public class BlockListener implements Listener {
 
     private boolean getLowerBlocks(Set<Block> sourceBlocks, Set<Block> destinationBlocks) {
         boolean climbing = true;
+
         for (Block b : sourceBlocks) {
-            if (!b.isPassable()) {
+            Material type = b.getType();
+
+            if (!b.isPassable() || type == Material.WATER || type == Material.LAVA) {
                 climbing = false;
                 break;
             }
-            destinationBlocks.add(b.getRelative(BlockFace.DOWN));
+
+            Block lowerBlock = b.getRelative(BlockFace.DOWN);
+            destinationBlocks.add(lowerBlock);
         }
+
         return climbing;
     }
+
+
 
     private double getMaxY(Set<Block> blocks) {
         double y = 0.0D;
