@@ -1,7 +1,7 @@
 name: ExyliaAntiBlockGlitch
 version: 1.0.1-HOTFIX
 main: net.diground.exyliaAntiBlockGlitch.ExyliaAntiBlockGlitch
-api-version: '1.13'
+api-version: '1.16'
 authors: [ DiGround ]
 website: plugins.exylia.net/support
 

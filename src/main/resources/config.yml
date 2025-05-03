@@ -1,7 +1,7 @@
 punishments:
   teleport: true
   effect: true
-  warning: true
+  warning: false
   damage: true
   sound: true
   message: true
