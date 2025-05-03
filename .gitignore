@@ -1,0 +1,15 @@
+/build/
+build/
+build
+
+.gradle/
+/.gradle/
+.gradle
+
+.idea/
+/.idea/
+.idea
+
+/gradle/
+gradle/
+gradle
