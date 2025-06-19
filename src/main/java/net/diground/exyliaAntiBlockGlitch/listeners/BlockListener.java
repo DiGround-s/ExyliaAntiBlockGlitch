@@ -20,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -34,6 +35,7 @@ import java.util.UUID;
 public class BlockListener implements Listener {
 
     private final ExyliaAntiBlockGlitch plugin;
+    private final Set<UUID> ourTeleports = new HashSet<>();
 
     public BlockListener(ExyliaAntiBlockGlitch plugin) {
         this.plugin = plugin;
@@ -115,6 +117,15 @@ public class BlockListener implements Listener {
         return xDiff <= 0.3D && xDiff >= -1.3D && zDiff <= 0.3D && zDiff >= -1.3D && block.getY() <= location.getBlockY();
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    public void onPlayerTeleport(PlayerTeleportEvent event) {
+        Player player = event.getPlayer();
+
+        if (ourTeleports.contains(player.getUniqueId())) {
+            event.setCancelled(false);
+        }
+    }
+
     private void handlePunishments(Player player, Set<Block> blocks) {
         FileConfiguration config = plugin.getConfigManager().getConfig();
 
@@ -122,7 +133,14 @@ public class BlockListener implements Listener {
         if (config.getBoolean("punishments.teleport")) {
             Location location = player.getLocation();
             location.setY((location.getBlockY() - 2) + getMaxY(blocks));
-            player.teleport(location);
+
+            ourTeleports.add(player.getUniqueId());
+
+            player.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN);
+
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                ourTeleports.remove(player.getUniqueId());
+            });
         }
 
         // Effects
